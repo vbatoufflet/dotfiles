@@ -101,8 +101,7 @@ def exec_setup(args=[]):
 
     if not os.path.exists(script_dir):
         os.makedirs(script_dir)
-
-    if os.path.exists(script_path):
+    elif os.path.exists(script_path):
         os.unlink(script_path)
 
     sys.stdout.write('   install %s\n' % strip_home_path(script_path))
