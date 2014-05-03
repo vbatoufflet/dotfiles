@@ -222,7 +222,7 @@ def config_install(namespace):
 
         if not os.path.exists(path_dir):
             os.makedirs(path_dir)
-        elif os.path.exists(path_dst):
+        elif os.path.exists(path_dst) or os.path.lexists(path_dst):
             os.unlink(path_dst)
 
         sys.stdout.write('   install %s\n' % strip_home_path(path_dst))
