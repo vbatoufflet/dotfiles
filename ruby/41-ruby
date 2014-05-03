@@ -1,0 +1,4 @@
+PATH=$(gem environment gempath | sed -e "s/:/\n/g" | grep "^$HOME" | sed -e 's/$/\/bin/')${PATH:+:$PATH}
+export PATH
+
+# vim: ft=sh ts=4 sw=4 et
