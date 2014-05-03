@@ -124,7 +124,7 @@ def exec_setup(args=[]):
 
 
 def get_available():
-    return sorted([x for x in os.listdir(get_config_path()) if os.path.isdir(get_config_path(x))])
+    return sorted([x for x in os.listdir(get_config_path()) if os.path.isdir(get_config_path(x)) and x != '.git'])
 
 
 def get_config_path(path=''):
