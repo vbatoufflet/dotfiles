@@ -1,0 +1,6 @@
+*~
+*.swo
+*.swp
+.DS_Store
+.pc
+sftp-config.json

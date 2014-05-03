@@ -1,0 +1,4 @@
+root = ~/.opt/lib/node_modules
+binroot = ~/.opt/bin
+manroot = ~/.opt/man
+global = true

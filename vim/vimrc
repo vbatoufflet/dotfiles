@@ -1,0 +1,39 @@
+" encoding
+set encoding=utf-8
+
+" syntax highlighting
+syntax enable
+set background=dark
+
+" indent
+set noexpandtab
+set smartindent
+set smarttab
+
+" filytype
+filetype indent on
+filetype plugin on
+
+" history
+set history=100
+
+" case
+set ignorecase
+set smartcase
+
+" miscellaneous
+set hidden
+set incsearch
+set modeline
+set nocompatible
+set nohlsearch
+set ruler
+set title
+set visualbell
+
+" autocmd
+"autocmd BufWritePre * :%s/\s\+$//e
+
+" keybindings
+nmap <F3> a<C-R>=strftime('%a, %d %b %Y %H:%M:%S %z')<CR><Esc>
+imap <F3> <C-R>=strftime('%a, %d %b %Y %H:%M:%S %z')<CR>

@@ -1,0 +1,9 @@
+autodetach on
+nonblock on
+startup_message off
+
+defscrollback 5000
+
+hardstatus on
+hardstatus string "%{.1099} %-w%{.0w}%n %t%{-}%+w %=%c:%s %M %d %H "
+hardstatus alwayslastline

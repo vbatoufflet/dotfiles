@@ -1,0 +1,6 @@
+DEBFULLNAME='Vincent Batoufflet'
+DEBEMAIL='vincent@batoufflet.info'
+DEBSIGN_MAINT=$DEBFULLNAME
+export DEBFULLNAME DEBEMAIL DEBSIGN_MAINT
+
+# vim: ft=sh ts=4 sw=4 et

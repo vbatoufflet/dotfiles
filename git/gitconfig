@@ -1,0 +1,33 @@
+[user]
+	name = Vincent Batoufflet
+	email = vincent@batoufflet.info
+[alias]
+	ci = commit -v
+	co = checkout
+	st = status
+	vdiff = difftool
+	spull = svn rebase --fetch-all
+	spush = svn dcommit
+[color]
+	ui = auto
+[color "branch"]
+	current = yellow bold
+	local =
+	remote =
+[color "diff"]
+	frag = magenta bold
+	meta = yellow bold
+	new = blue bold
+	old = red bold
+[color "status"]
+	added = green bold
+	changed = red bold
+	untracked =
+[core]
+	excludesfile = ~/.gitignore
+[difftool]
+	prompt = false
+[pull]
+	rebase = true
+[push]
+	default = simple

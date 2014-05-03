@@ -1,0 +1,7 @@
+if [ -d $HOME/.bash_completion.d/* ]; then
+    for FILE in $HOME/.bash_completion.d/*; do
+        source $FILE
+    done
+fi
+
+# vim: ft=sh ts=4 sw=4 et

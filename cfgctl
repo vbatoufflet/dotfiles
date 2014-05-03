@@ -1,0 +1,342 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+#
+# The MIT License (MIT)
+#
+# Copyright (c) 2014 Vincent Batoufflet <vincent@batoufflet.info>
+#
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+#
+# The above copyright notice and this permission notice shall be included in all
+# copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+# SOFTWARE.
+#
+
+
+import codecs
+import ConfigParser
+import fnmatch
+import getopt
+import os
+import re
+import shutil
+import subprocess
+import sys
+
+
+EXCLUDES = (
+    '.config',
+    '.gitignore'
+)
+
+
+class CommandError(Exception):
+    pass
+
+
+class NamespaceError(Exception):
+    pass
+
+
+def exec_add(args=[]):
+    if len(args) < 1:
+        raise CommandError
+
+    if args[0] == 'ALL':
+        args = get_available()
+
+    for namespace in args:
+        config_install(namespace)
+
+
+def exec_list(args=[]):
+    if len(args) != 0:
+        raise CommandError
+
+    installed = get_installed()
+
+    print_columns(['[%1s] %s' % ('x' if x in installed else '', x) for x in get_available()])
+
+
+def exec_refresh(args=[]):
+    if len(args) != 0:
+        raise CommandError
+
+    for namespace in get_installed():
+        config_install(namespace)
+
+
+def exec_remove(args=[]):
+    if len(args) < 1:
+        raise CommandError
+
+    if args[0] == 'ALL':
+        args = get_available()
+
+    for namespace in args:
+        config_uninstall(namespace)
+
+
+def exec_setup(args=[]):
+    if len(args) != 0:
+        raise CommandError
+
+    sys.stdout.write('setup\n')
+
+    # Create script symlink
+    script_path = get_home_path(os.path.join('.scripts', 'cfgctl'))
+    script_dir = os.path.dirname(script_path)
+
+    if not os.path.exists(script_dir):
+        os.makedirs(script_dir)
+
+    if os.path.exists(script_path):
+        os.unlink(script_path)
+
+    sys.stdout.write('   install %s\n' % strip_home_path(script_path))
+
+    os.symlink(get_config_path('cfgctl'), script_path)
+
+    # Copy default configuration file
+    default_src = get_config_path('cfgctl.default')
+    default_dst = get_home_path('.cfgctlrc')
+
+    if os.path.exists(default_src):
+        if os.path.exists(default_dst):
+            os.unlink(default_dst)
+
+        sys.stdout.write('   install %s\n' % strip_home_path(default_dst))
+
+        shutil.copyfile(default_src, default_dst)
+
+    exec_refresh()
+
+
+def get_available():
+    return sorted([x for x in os.listdir(get_config_path()) if os.path.isdir(get_config_path(x))])
+
+
+def get_config_path(path=''):
+    return os.path.join(opt_config, path).rstrip('/')
+
+
+def get_home_path(path=''):
+    return os.path.join(os.environ.get('HOME'), path).rstrip('/')
+
+
+def get_installed():
+    result = set()
+
+    file_path = get_home_path('.cfgctlrc')
+
+    if not os.path.exists(file_path):
+        return result
+
+    for line in codecs.open(file_path, 'r', 'utf-8').readlines():
+        line = line.strip()
+
+        if line.startswith('#'):
+            continue
+
+        result.add(line)
+
+    return result
+
+
+def get_destination_path(namespace, name):
+    path = '.' + name
+
+    # Get operating system name
+    os_name = subprocess.check_output(['uname', '-s']).strip()
+
+    # Check for path override
+    parser = get_namespace_config(namespace)
+
+    if parser is not None:
+        for section in parser.sections():
+            if section != 'self' and not pattern_match(section, name):
+                continue
+
+            if parser.has_option(section, 'location.%s' % os_name):
+                path = parser.get(section, 'location.%s' % os_name)
+            else:
+                path = parser.get(section, 'location')
+
+            break
+
+    return get_home_path(path).rstrip('/')
+
+
+def get_namespace_config(namespace):
+    file_path = get_config_path(os.path.join(namespace, '.config'))
+
+    if os.path.exists(file_path):
+        parser = ConfigParser.RawConfigParser()
+        parser.readfp(codecs.open(file_path, 'r', 'utf-8'))
+        return parser
+
+    return None
+
+
+def get_namespace_entries(namespace):
+    dir_path = get_config_path(namespace)
+
+    namespace_config = get_namespace_config(namespace)
+
+    if namespace_config is not None and namespace_config.has_section('self'):
+        return ['']
+
+    if not os.path.exists(dir_path) or not os.path.isdir(dir_path):
+        raise NamespaceError("unknown `%s' namespace" % namespace)
+
+    return [x for x in os.listdir(dir_path) if x not in EXCLUDES]
+
+
+def config_install(namespace):
+    if namespace not in get_installed():
+        with open(get_home_path('.cfgctlrc'), 'a') as fd:
+            fd.write('%s\n' % namespace)
+            fd.close()
+
+    # Get configuration
+    namespace_entries = get_namespace_entries(namespace)
+
+    if len(namespace_entries) > 0:
+        sys.stdout.write('%s\n' % namespace)
+
+    for entry in namespace_entries:
+        path_src = get_config_path(os.path.join(namespace, entry))
+        path_dst = get_destination_path(namespace, entry)
+        path_dir = os.path.dirname(path_dst)
+
+        if not os.path.exists(path_dir):
+            os.makedirs(path_dir)
+        elif os.path.exists(path_dst):
+            os.unlink(path_dst)
+
+        sys.stdout.write('   install %s\n' % strip_home_path(path_dst))
+
+        os.symlink(path_src, path_dst)
+
+
+def config_uninstall(namespace):
+    installed = get_installed()
+
+    if namespace in installed:
+        installed.remove(namespace)
+
+        with open(get_home_path('.cfgctlrc'), 'w') as fd:
+            fd.write('\n'.join(installed) + '\n')
+            fd.close()
+
+    namespace_entries = get_namespace_entries(namespace)
+
+    if len(namespace_entries) > 0:
+        sys.stdout.write('%s\n' % namespace)
+
+    for entry in namespace_entries:
+        path_dst = get_destination_path(namespace, entry)
+        path_dir = os.path.dirname(path_dst)
+
+        sys.stdout.write('   uninstall %s\n' % strip_home_path(path_dst))
+
+        if os.path.exists(path_dst):
+            os.unlink(path_dst)
+
+            if path_dir != get_home_path().rstrip('/'):
+                try:
+                    os.removedirs(path_dir)
+                except OSError:
+                    pass
+
+
+def pattern_match(pattern, value):
+    if pattern.startswith('glob:'):
+        return fnmatch.fnmatch(value, pattern[5:])
+    elif pattern.startswith('regexp:'):
+        return re.search(pattern[7:], value) is not None
+    elif pattern.startswith('file:'):
+        return value == pattern[5:]
+    else:
+        return False
+
+
+def print_columns(data):
+    length = max([len(x) for x in data]) + 3
+    lines = len(data) / (os.environ.get('COLUMNS', 80) / length)
+
+    entries = (''.join((data[x+y].ljust(length) for x in range(0, len(data), lines))) for y in range(0, lines))
+
+    sys.stdout.write('\n'.join(entries) + '\n')
+
+
+def print_usage(fd=sys.stdout):
+    fd.write((
+        'Usage: %(program)s [OPTIONS] {add|remove} {NAME...|ALL}\n'
+        '       %(program)s [OPTIONS] {list|refresh|setup}\n'
+        '\n'
+        'Commands:\n'
+        '   add      install new configurations\n'
+        '   list     list available configurations\n'
+        '   remove   remove installed configurations\n'
+        '   refresh  refresh existing configuration installation\n'
+        '   setup    setup configuration management environment\n'
+        '\n'
+        'Options:\n'
+        '   -c  specify base configuration directory\n'
+        '   -h  display this help and exit\n'
+    ) % {'program': os.path.basename(sys.argv[0])})
+
+
+def strip_home_path(path):
+    return path[len(os.environ.get('HOME'))+1:]
+
+
+if __name__ == '__main__':
+    opt_config = os.path.dirname(os.path.realpath(sys.argv[0]))
+
+    try:
+        # Parse for command-line arguments
+        try:
+            opts, args = getopt.gnu_getopt(sys.argv[1:], 'c:h')
+
+            for opt, arg in opts:
+                if opt == '-c':
+                    opt_config = arg
+                elif opt == '-h':
+                    print_usage()
+                    sys.exit(0)
+        except Exception as e:
+            raise CommandError(e)
+
+        if len(args) == 0:
+            raise CommandError
+
+        # Execute command
+        try:
+            locals()['exec_%s' % args[0]](args[1:])
+        except KeyError:
+            raise CommandError("unknown `%s' command" % args[0])
+    except CommandError as e:
+        if e.message:
+            sys.stderr.write("Error: %s\n" % e.message)
+
+        print_usage(fd=sys.stderr)
+        sys.exit(1)
+    except NamespaceError as e:
+        sys.stderr.write("Error: %s\n" % e.message)
+        sys.exit(1)
+
+# vim: ts=4 sw=4 et

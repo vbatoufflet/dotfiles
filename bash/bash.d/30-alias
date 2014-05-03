@@ -1,0 +1,9 @@
+alias cp='cp -iv'
+alias df='df -h'
+alias du='du -h'
+alias ll='ls -lh'
+alias l='ls -lAh'
+alias mv='mv -iv'
+alias rm='rm -iv'
+
+# vim: ft=sh ts=4 sw=4 et

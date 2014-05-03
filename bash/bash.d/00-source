@@ -1,0 +1,4 @@
+[ -f /etc/profile ] && source /etc/profile
+[ -f /etc/bash.bashrc ] && source /etc/bash.bashrc
+
+# vim: ft=sh ts=4 sw=4 et
