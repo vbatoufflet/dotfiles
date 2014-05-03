@@ -1,0 +1,9 @@
+style "default" {
+  font_name="Open Sans 8"
+}
+
+gtk-theme-name="Zukitwo"
+gtk-icon-theme-name="Moka"
+gtk-font-name="Open Sans 8"
+gtk-cursor-theme-name="DMZ-White"
+gtk-cursor-theme-size=0
