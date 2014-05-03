@@ -1,0 +1,24 @@
+{
+	"auto_complete_commit_on_tab": true,
+	"auto_complete_selector": "source, meta.tag - punctuation.definition.tag.begin",
+	"auto_find_in_selection": true,
+	"bold_folder_labels": true,
+	"color_scheme": "Packages/User/Monokai Soda.tmTheme",
+	"dictionary": "Packages/Dictionaries/French.dic",
+	"ensure_newline_at_eof_on_save": true,
+	"find_selected_text": true,
+	"highlight_line": true,
+	"ignored_packages":
+	[
+	],
+	"indent_to_bracket": true,
+	"rulers":
+	[
+		120
+	],
+	"shift_tab_unindent": true,
+	"soda_classic_tabs": true,
+	"theme": "Soda Dark.sublime-theme",
+	"trim_trailing_white_space_on_save": true,
+	"use_simple_full_screen": true
+}

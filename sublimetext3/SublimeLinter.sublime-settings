@@ -1,0 +1,9 @@
+{
+    "pep8_ignore":
+    [
+        "E128",
+        "E501"
+    ],
+    "sublimelinter_gutter_marks_theme": "bright",
+    "sublimelinter_mark_style": "outline"
+}

@@ -1,0 +1,6 @@
+{
+	"fmt_cmd":
+	[
+		"goimports"
+	]
+}
