@@ -173,6 +173,8 @@ def get_destination_path(namespace, name):
             else:
                 path = parser.get(section, 'location')
 
+            path = os.path.join(path, name)
+
             break
 
     return get_home_path(path).rstrip('/')
