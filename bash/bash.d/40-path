@@ -1,6 +1,6 @@
 PATH=$HOME/.scripts:$HOME/.opt/bin:/sbin:/usr/sbin:/usr/local/sbin${PATH:+:$PATH}
 
-MANPATH=$(manpath -q)
+MANPATH=$(manpath 2>/dev/null)
 MANPATH=$HOME/.opt/share/man${MANPATH:+:$MANPATH}
 
 export PATH MANPATH
