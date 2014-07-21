@@ -4,8 +4,8 @@ if [ -d $HOME/.bash_completion.d/* ]; then
     done
 fi
 
-if [ "$(uname -s)" == 'Darwin' -a -f $(brew --prefix)/etc/bash_completion ]; then
-    source $(brew --prefix)/etc/bash_completion
+if [ "$(uname -s)" == 'Darwin' -a -n "$(which brew)" ]; then
+    [ $(brew --prefix)/etc/bash_completion ] && source $(brew --prefix)/etc/bash_completion
 fi
 
 # vim: ft=sh ts=4 sw=4 et
