@@ -5,7 +5,7 @@ if [ -d $HOME/.bash_completion.d/* ]; then
 fi
 
 if [ "$(uname -s)" == 'Darwin' -a -n "$(which brew)" ]; then
-    [ $(brew --prefix)/etc/bash_completion ] && source $(brew --prefix)/etc/bash_completion
+    [ -f $(brew --prefix)/etc/bash_completion ] && source $(brew --prefix)/etc/bash_completion
 fi
 
 # vim: ft=sh ts=4 sw=4 et
