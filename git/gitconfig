@@ -2,6 +2,7 @@
 	name = Vincent Batoufflet
 	email = vincent@batoufflet.info
 [alias]
+	br = branch
 	ci = commit -v
 	co = checkout
 	st = status
