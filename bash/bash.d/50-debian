@@ -3,4 +3,6 @@ DEBEMAIL='vincent@batoufflet.info'
 DEBSIGN_MAINT=$DEBFULLNAME
 export DEBFULLNAME DEBEMAIL DEBSIGN_MAINT
 
+[ -n "$(which debsign)" ] && alias debsign="debsign -e \"$DEBFULLNAME\""
+
 # vim: ft=sh ts=4 sw=4 et
