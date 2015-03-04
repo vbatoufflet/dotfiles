@@ -31,8 +31,8 @@ set ruler
 set title
 set visualbell
 
-" autocmd
-"autocmd BufWritePre * :%s/\s\+$//e
+" status
+set laststatus=2
 
 " keybindings
 nmap <F3> a<C-R>=strftime('%a, %d %b %Y %H:%M:%S %z')<CR><Esc>
