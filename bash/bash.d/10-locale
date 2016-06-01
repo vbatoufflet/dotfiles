@@ -1,4 +1,4 @@
-if ( locale -a | grep -qE '^en_US.utf8$' ); then
+if ( locale -a | grep -qiE '^en_US.utf-?8$' ); then
     LANG='en_US.UTF-8'
     LANGUAGE=$LANG
     export LANG LANGUAGE
