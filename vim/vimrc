@@ -34,6 +34,10 @@ set visualbell
 " status
 set laststatus=2
 
+" menu
+set wildmenu
+set wildmode=list:longest
+
 " keybindings
 nmap <F3> a<C-R>=strftime('%a, %d %b %Y %H:%M:%S %z')<CR><Esc>
 imap <F3> <C-R>=strftime('%a, %d %b %Y %H:%M:%S %z')<CR>
