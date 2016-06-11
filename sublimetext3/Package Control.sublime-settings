@@ -1,10 +1,17 @@
 {
+	"bootstrapped": true,
+	"in_process_packages":
+	[
+	],
 	"installed_packages":
 	[
 		"Dictionaries",
+		"Dockerfile Syntax Highlighting",
 		"GoSublime",
-		"LESS",
+		"Jinja2",
 		"Markdown Preview",
+		"Package Control",
+		"SaltStack-related syntax highlighting and snippets",
 		"SFTP",
 		"SublimeCodeIntel",
 		"Theme - Soda"

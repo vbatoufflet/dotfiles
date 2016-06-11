@@ -1,5 +1,5 @@
 {
-	"fmt_cmd":
+    "fmt_cmd":
 	[
 		"goimports"
 	]

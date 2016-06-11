@@ -3,10 +3,13 @@
 	"auto_complete_selector": "source, meta.tag - punctuation.definition.tag.begin",
 	"auto_find_in_selection": true,
 	"bold_folder_labels": true,
+	"close_windows_when_empty": false,
 	"color_scheme": "Packages/User/Monokai Soda.tmTheme",
-	"dictionary": "Packages/Dictionaries/French.dic",
+	"dictionary": "Packages/Language - English/en_US.dic",
 	"ensure_newline_at_eof_on_save": true,
 	"find_selected_text": true,
+	"font_face": "PragmataPro",
+	"font_size": 11,
 	"highlight_line": true,
 	"ignored_packages":
 	[
