@@ -3,7 +3,7 @@
 #
 # The MIT License (MIT)
 #
-# Copyright (c) 2014 Vincent Batoufflet <vincent@batoufflet.info>
+# Copyright (c) 2014-2016 Vincent Batoufflet <vincent@batoufflet.info>
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -25,6 +25,7 @@
 #
 
 
+from __future__ import print_function
 import codecs
 import ConfigParser
 import fnmatch
@@ -93,7 +94,7 @@ def exec_setup(args=[]):
     if len(args) != 0:
         raise CommandError
 
-    sys.stdout.write('setup\n')
+    print('setup')
 
     # Create script symlink
     script_path = get_home_path(os.path.join('.scripts', 'cfgctl'))
@@ -104,7 +105,7 @@ def exec_setup(args=[]):
     elif os.path.exists(script_path):
         os.unlink(script_path)
 
-    sys.stdout.write('   install %s\n' % strip_home_path(script_path))
+    print('   install %s' % strip_home_path(script_path))
 
     os.symlink(get_config_path('cfgctl'), script_path)
 
@@ -116,7 +117,7 @@ def exec_setup(args=[]):
         if os.path.exists(default_dst):
             os.unlink(default_dst)
 
-        sys.stdout.write('   install %s\n' % strip_home_path(default_dst))
+        print('   install %s' % strip_home_path(default_dst))
 
         shutil.copyfile(default_src, default_dst)
 
@@ -215,7 +216,7 @@ def config_install(namespace):
     namespace_entries = get_namespace_entries(namespace)
 
     if len(namespace_entries) > 0:
-        sys.stdout.write('%s\n' % namespace)
+        print(namespace)
 
     for entry in namespace_entries:
         path_src = get_config_path(os.path.join(namespace, entry))
@@ -227,7 +228,7 @@ def config_install(namespace):
         elif os.path.exists(path_dst) or os.path.lexists(path_dst):
             os.unlink(path_dst)
 
-        sys.stdout.write('   install %s\n' % strip_home_path(path_dst))
+        print('   install %s' % strip_home_path(path_dst))
 
         os.symlink(path_src, path_dst)
 
@@ -245,13 +246,13 @@ def config_uninstall(namespace):
     namespace_entries = get_namespace_entries(namespace)
 
     if len(namespace_entries) > 0:
-        sys.stdout.write('%s\n' % namespace)
+        print(namespace)
 
     for entry in namespace_entries:
         path_dst = get_destination_path(namespace, entry)
         path_dir = os.path.dirname(path_dst)
 
-        sys.stdout.write('   uninstall %s\n' % strip_home_path(path_dst))
+        print('   uninstall %s' % strip_home_path(path_dst))
 
         if os.path.exists(path_dst):
             os.unlink(path_dst)
@@ -275,16 +276,16 @@ def pattern_match(pattern, value):
 
 
 def print_columns(data):
+    total = len(data)
     length = max([len(x) for x in data]) + 3
-    lines = len(data) / (os.environ.get('COLUMNS', 80) / length)
+    lines = total / (os.environ.get('COLUMNS', 80) / length)
 
-    entries = (''.join((data[x+y].ljust(length) for x in range(0, len(data), lines))) for y in range(0, lines))
+    for line in range(0, lines):
+        print(''.join([data[x+line].ljust(length) for x in range(0, total, lines) if x + line < total]))
 
-    sys.stdout.write('\n'.join(entries) + '\n')
 
-
-def print_usage(fd=sys.stdout):
-    fd.write((
+def print_usage(file=sys.stdout):
+    print(
         'Usage: %(program)s [OPTIONS] {add|remove} {NAME...|ALL}\n'
         '       %(program)s [OPTIONS] {list|refresh|setup}\n'
         '\n'
@@ -298,7 +299,7 @@ def print_usage(fd=sys.stdout):
         'Options:\n'
         '   -c  specify base configuration directory\n'
         '   -h  display this help and exit\n'
-    ) % {'program': os.path.basename(sys.argv[0])})
+        % {'program': os.path.basename(sys.argv[0])}, file=file)
 
 
 def strip_home_path(path):
@@ -318,7 +319,7 @@ if __name__ == '__main__':
                     opt_config = arg
                 elif opt == '-h':
                     print_usage()
-                    sys.exit(0)
+                    exit(0)
         except Exception as e:
             raise CommandError(e)
 
@@ -332,12 +333,12 @@ if __name__ == '__main__':
             raise CommandError("unknown `%s' command" % args[0])
     except CommandError as e:
         if e.message:
-            sys.stderr.write("Error: %s\n" % e.message)
+            print("Error: %s" % e.message, file=sys.stderr)
 
-        print_usage(fd=sys.stderr)
-        sys.exit(1)
+        print_usage(file=sys.stderr)
+        exit(1)
     except NamespaceError as e:
-        sys.stderr.write("Error: %s\n" % e.message)
-        sys.exit(1)
+        print("Error: %s" % e.message, file=sys.stderr)
+        exit(1)
 
 # vim: ts=4 sw=4 et
