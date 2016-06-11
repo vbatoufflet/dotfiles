@@ -1,7 +1,7 @@
 GOPATH=$HOME/.opt/lib/go
-GOBIN=$HOME/.opt/bin
-export GOPATH GOBIN
+export GOPATH
 
-alias go=colorgo
+PATH=$GOPATH/bin${PATH:+:$PATH}
+export PATH
 
 # vim: ft=sh ts=4 sw=4 et
