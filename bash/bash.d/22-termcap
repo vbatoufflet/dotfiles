@@ -1,11 +1,11 @@
-if [ "$(uname -s)" == 'Darwin' ]; then
+if [[ "$(uname -s)" == "Darwin" ]]; then
     export CLICOLOR=1
-elif [ "$TERM" != 'dumb' ]; then
+elif [[ "${TERM}" != "dumb" ]]; then
     eval "$(dircolors -b)"
-    alias ls='ls --color=auto'
+    alias ls="ls --color=auto"
 fi
 
-PS1='\[\033[01;32m\]\h:\[\033[0m\]\W\[\033[01;32m\]>\[\033[0m\] '
+PS1="\[\033[01;32m\]\h:\[\033[0m\]\W\[\033[01;32m\]>\[\033[0m\] "
 LESS_TERMCAP_mb=$'\E[01;31m'
 LESS_TERMCAP_md=$'\E[01;31m'
 LESS_TERMCAP_me=$'\E[0m'

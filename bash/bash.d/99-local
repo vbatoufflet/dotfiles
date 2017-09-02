@@ -1,3 +1,3 @@
-[ -f $HOME/.config/bash/local ] && source $HOME/.config/bash/local
+[ -f ${HOME}/.config/bash/local ] && source ${HOME}/.config/bash/local
 
 # vim: ft=sh ts=4 sw=4 et

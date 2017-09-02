@@ -1,0 +1,12 @@
+if [[ "$(uname -s)" == "Darwin" && -n "$(which brew)" ]]; then
+    BREW_PREFIX="$(brew --prefix)"
+    [[ -f ${BREW_PREFIX}/etc/bash_completion ]] && source ${BREW_PREFIX}/etc/bash_completion
+fi
+
+if [[ -d ${HOME}/.bash_completion.d ]]; then
+    for FILE in ${HOME}/.bash_completion.d/*; do
+        source ${FILE}
+    done
+fi
+
+# vim: ft=sh ts=4 sw=4 et

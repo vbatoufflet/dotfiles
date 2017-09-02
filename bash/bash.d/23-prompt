@@ -1,0 +1,13 @@
+PATH="${HOME}/.opt/lib/go/bin:${PATH}"
+
+if [[ -n "$(which powerline-go 2>/dev/null)" ]]; then
+    _update_ps1() {
+        PS1="$(powerline-go -modules ssh,host,gitlite,cwd,jobs,exit)"
+    }
+
+    if [ "${TERM}" != "linux" ]; then
+        PROMPT_COMMAND="_update_ps1; ${PROMPT_COMMAND}"
+    fi
+fi
+
+# vim: ft=sh ts=4 sw=4 et

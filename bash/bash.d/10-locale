@@ -1,7 +1,0 @@
-if ( locale -a | grep -qiE '^en_US.utf-?8$' ); then
-    LANG='en_US.UTF-8'
-    LANGUAGE=$LANG
-    export LANG LANGUAGE
-fi
-
-# vim: ft=sh ts=4 sw=4 et

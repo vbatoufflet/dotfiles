@@ -1,11 +1,11 @@
-alias cp='cp -iv'
-alias df='df -h'
-alias du='du -h'
-alias ll='ls -lh'
-alias l='ls -lAh'
-alias mv='mv -iv'
-alias rm='rm -iv'
+alias cp="cp -iv"
+alias df="df -h"
+alias du="du -h"
+alias ll="ls -lh"
+alias l="ls -lAh"
+alias mv="mv -iv"
+alias rm="rm -iv"
 
-[ -n "$(which tmux 2>/dev/null)" ] && alias tmux='tmux -2'
+[[ -n "$(which tmux 2>/dev/null)" ]] && alias tmux="tmux -2"
 
 # vim: ft=sh ts=4 sw=4 et
