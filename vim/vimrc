@@ -27,9 +27,9 @@ set incsearch
 set modeline
 set nocompatible
 set nohlsearch
+set novisualbell
 set ruler
 set title
-set visualbell
 
 " status
 set laststatus=2
