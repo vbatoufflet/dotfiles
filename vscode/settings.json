@@ -1,0 +1,31 @@
+{
+    "editor.find.autoFindInSelection": true,
+    "editor.fontFamily": "PragmataPro",
+    "editor.fontSize": 11,
+    "editor.matchBrackets": false,
+    "editor.renderIndentGuides": false,
+    "editor.renderWhitespace": "boundary",
+    "editor.rulers": [
+        120,
+    ],
+    "eslint.packageManager": "yarn",
+    "explorer.confirmDelete": false,
+    "files.exclude": {
+        ".vscode": true,
+        "*.sublime-*": true,
+    },
+    "files.insertFinalNewline": true,
+    "git.decorations.enabled": false,
+    "telemetry.enableTelemetry": false,
+    "workbench.colorCustomizations": {
+        "editorWhitespace.foreground": "#333",
+    },
+    "workbench.colorTheme": "Mustang",
+    "workbench.startupEditor": "none",
+    "workbench.statusBar.feedback.visible": false,
+    "[markdown]": {
+        "editor.rulers": [
+            79
+        ]
+    },
+}
