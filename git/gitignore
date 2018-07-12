@@ -1,7 +1,9 @@
-*~
+*.sublime-project
+*.sublime-workspace
 *.swo
 *.swp
+*~
 .DS_Store
 .pc
+.vscode
 sftp-config.json
-*.sublime-*
