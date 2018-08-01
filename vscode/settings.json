@@ -8,13 +8,16 @@
     "editor.rulers": [
         120,
     ],
+    "eslint.autoFixOnSave": true,
     "eslint.packageManager": "yarn",
     "explorer.confirmDelete": false,
+    "explorer.confirmDragAndDrop": false,
     "files.exclude": {
         ".vscode": true,
         "*.sublime-*": true,
     },
     "files.insertFinalNewline": true,
+    "files.trimTrailingWhitespace": true,
     "git.decorations.enabled": false,
     "telemetry.enableTelemetry": false,
     "workbench.colorCustomizations": {
@@ -26,6 +29,7 @@
     "[markdown]": {
         "editor.rulers": [
             79
-        ]
+        ],
+        "files.trimTrailingWhitespace": false,
     },
 }
