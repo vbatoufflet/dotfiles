@@ -1,4 +1,4 @@
-GOPATH="${HOME}/.opt/lib/go"
+GOPATH="${HOME}/.opt/lib/go:${HOME}/Development/go"
 export GOPATH
 
 PATH="${GOPATH}/bin${PATH:+:${PATH}}"
