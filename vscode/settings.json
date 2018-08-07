@@ -1,4 +1,13 @@
 {
+    "cSpell.languageSettings": [
+        {
+            "ignoreRegExpList": [
+                "import\\s+(?:[^\"]+\\s+)?\"[^\"]+\"",
+                "import\\s+\\([^\\)]+\\)"
+            ],
+            "languageId": "go"
+        }
+    ],
     "editor.find.autoFindInSelection": true,
     "editor.fontFamily": "PragmataPro",
     "editor.fontSize": 11,
@@ -6,22 +15,22 @@
     "editor.renderIndentGuides": false,
     "editor.renderWhitespace": "boundary",
     "editor.rulers": [
-        120,
+        120
     ],
     "eslint.autoFixOnSave": true,
     "eslint.packageManager": "yarn",
     "explorer.confirmDelete": false,
     "explorer.confirmDragAndDrop": false,
     "files.exclude": {
-        ".vscode": true,
         "*.sublime-*": true,
+        ".vscode": true
     },
     "files.insertFinalNewline": true,
     "files.trimTrailingWhitespace": true,
     "git.decorations.enabled": false,
     "telemetry.enableTelemetry": false,
     "workbench.colorCustomizations": {
-        "editorWhitespace.foreground": "#333",
+        "editorWhitespace.foreground": "#333"
     },
     "workbench.colorTheme": "Mustang",
     "workbench.startupEditor": "none",
@@ -30,6 +39,6 @@
         "editor.rulers": [
             79
         ],
-        "files.trimTrailingWhitespace": false,
-    },
+        "files.trimTrailingWhitespace": false
+    }
 }
