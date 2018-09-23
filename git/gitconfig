@@ -27,3 +27,5 @@
 [push]
 	default = simple
 	followTags = true
+[rebase]
+	autostash = true
