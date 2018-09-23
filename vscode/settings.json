@@ -21,24 +21,30 @@
     "eslint.packageManager": "yarn",
     "explorer.confirmDelete": false,
     "explorer.confirmDragAndDrop": false,
+    "explorer.decorations.colors": false,
     "files.exclude": {
-        "*.sublime-*": true,
-        ".vscode": true
+        "**/.DS_Store": true,
+        "**/.git": true,
+        "**/.hg": true,
+        "**/.svn": true,
+        "**/.vscode": true,
+        "**/CVS": true
     },
     "files.insertFinalNewline": true,
     "files.trimTrailingWhitespace": true,
-    "git.decorations.enabled": false,
     "telemetry.enableTelemetry": false,
     "workbench.colorCustomizations": {
         "editorWhitespace.foreground": "#333"
     },
     "workbench.colorTheme": "Mustang",
+    "workbench.enableExperiments": false,
     "workbench.startupEditor": "none",
     "workbench.statusBar.feedback.visible": false,
     "[markdown]": {
         "editor.rulers": [
-            79
+            80
         ],
         "files.trimTrailingWhitespace": false
-    }
+    },
+    "python.pythonPath": "/usr/local/bin/python3"
 }
