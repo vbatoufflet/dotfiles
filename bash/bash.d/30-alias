@@ -8,4 +8,6 @@ alias rm="rm -iv"
 
 [[ -n "$(which tmux 2>/dev/null)" ]] && alias tmux="tmux -2"
 
+[[ -n "$(which bat 2>/dev/null)" ]] && alias cat="bat"
+
 # vim: ft=sh ts=4 sw=4 et
