@@ -9,8 +9,8 @@
         }
     ],
     "editor.find.autoFindInSelection": true,
-    "editor.fontFamily": "PragmataPro",
-    "editor.fontSize": 11,
+    "editor.fontFamily": "Iosevka",
+    "editor.fontWeight": "700",
     "editor.matchBrackets": false,
     "editor.renderIndentGuides": false,
     "editor.renderWhitespace": "boundary",
@@ -32,7 +32,11 @@
     },
     "files.insertFinalNewline": true,
     "files.trimTrailingWhitespace": true,
+    "python.formatting.provider": "autopep8",
     "telemetry.enableTelemetry": false,
+    "terminal.integrated.fontWeightBold": "700",
+    "window.nativeFullScreen": false,
+    "window.restoreFullscreen": true,
     "workbench.colorCustomizations": {
         "editorWhitespace.foreground": "#333"
     },
@@ -46,5 +50,7 @@
         ],
         "files.trimTrailingWhitespace": false
     },
-    "python.pythonPath": "/usr/local/bin/python3"
+    "[python]": {
+        "editor.formatOnSave": true,
+    }
 }
