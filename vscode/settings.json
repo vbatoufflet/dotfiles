@@ -1,4 +1,5 @@
 {
+    "cSpell.language": "en",
     "cSpell.languageSettings": [
         {
             "ignoreRegExpList": [
@@ -6,8 +7,17 @@
                 "import\\s+\\([^\\)]+\\)"
             ],
             "languageId": "go"
+        },
+        {
+            "ignoreRegExpList": [
+                "import\\s+\\{?\\s*\\S+(?:,\\s*\\S+){0,}\\s*\\}?\\s+from\\s+['\"][^'\"]+['\"];"
+            ],
+            "languageId": "typescript"
         }
     ],
+    "editor.codeActionsOnSave": {
+        "source.fixAll.tslint": true
+    },
     "editor.find.autoFindInSelection": true,
     "editor.fontFamily": "Iosevka",
     "editor.fontWeight": "700",
@@ -17,8 +27,6 @@
     "editor.rulers": [
         120
     ],
-    "eslint.autoFixOnSave": true,
-    "eslint.packageManager": "yarn",
     "explorer.confirmDelete": false,
     "explorer.confirmDragAndDrop": false,
     "explorer.decorations.colors": false,
@@ -49,8 +57,5 @@
             80
         ],
         "files.trimTrailingWhitespace": false
-    },
-    "[python]": {
-        "editor.formatOnSave": true,
     }
 }
