@@ -4,4 +4,7 @@ export GOPATH
 PATH="${GOPATH}/bin${PATH:+:${PATH}}"
 export PATH
 
+GO111MODULE=on
+export GO111MODULE
+
 # vim: ft=sh ts=4 sw=4 et
