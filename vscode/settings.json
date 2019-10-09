@@ -1,5 +1,4 @@
 {
-    "cSpell.language": "en",
     "cSpell.languageSettings": [
         {
             "ignoreRegExpList": [
@@ -27,6 +26,21 @@
     "editor.rulers": [
         120
     ],
+    "eslint.autoFixOnSave": true,
+    "eslint.validate": [
+        {
+            "autoFix": true,
+            "language": "javascript"
+        },
+        {
+            "autoFix": true,
+            "language": "typescript"
+        },
+        {
+            "autoFix": true,
+            "language": "vue"
+        }
+    ],
     "explorer.confirmDelete": false,
     "explorer.confirmDragAndDrop": false,
     "explorer.decorations.colors": false,
@@ -40,6 +54,7 @@
     },
     "files.insertFinalNewline": true,
     "files.trimTrailingWhitespace": true,
+    "go.formatTool": "goimports",
     "python.formatting.provider": "autopep8",
     "telemetry.enableTelemetry": false,
     "terminal.integrated.fontWeightBold": "700",
