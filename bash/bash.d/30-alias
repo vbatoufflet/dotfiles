@@ -10,4 +10,6 @@ alias rm="rm -iv"
 
 [[ -n "$(which bat 2>/dev/null)" ]] && alias cat="bat"
 
+[[ -n "$(which gls 2>/dev/null)" ]] && alias ls="gls --color --group-directories-first"
+
 # vim: ft=sh ts=4 sw=4 et
