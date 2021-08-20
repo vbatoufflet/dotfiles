@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 #
 # The MIT License (MIT)
@@ -27,7 +27,7 @@
 
 from __future__ import print_function
 import codecs
-import ConfigParser
+import configparser
 import fnmatch
 import getopt
 import os
@@ -185,8 +185,8 @@ def get_namespace_config(namespace):
     file_path = get_config_path(os.path.join(namespace, '.config'))
 
     if os.path.exists(file_path):
-        parser = ConfigParser.RawConfigParser()
-        parser.readfp(codecs.open(file_path, 'r', 'utf-8'))
+        parser = configparser.RawConfigParser()
+        parser.read_file(codecs.open(file_path, 'r', 'utf-8'))
         return parser
 
     return None
@@ -278,7 +278,7 @@ def pattern_match(pattern, value):
 def print_columns(data):
     total = len(data)
     length = max([len(x) for x in data]) + 3
-    lines = total / (os.environ.get('COLUMNS', 80) / length)
+    lines = int(total / (os.environ.get('COLUMNS', 80) / length))
 
     for line in range(0, lines):
         print(''.join([data[x+line].ljust(length) for x in range(0, total, lines) if x + line < total]))
@@ -321,7 +321,7 @@ if __name__ == '__main__':
                     print_usage()
                     exit(0)
         except Exception as e:
-            raise CommandError(e)
+            raise CommandError from e
 
         if len(args) == 0:
             raise CommandError
@@ -332,9 +332,6 @@ if __name__ == '__main__':
         except KeyError:
             raise CommandError("unknown `%s' command" % args[0])
     except CommandError as e:
-        if e.message:
-            print("Error: %s" % e.message, file=sys.stderr)
-
         print_usage(file=sys.stderr)
         exit(1)
     except NamespaceError as e:
