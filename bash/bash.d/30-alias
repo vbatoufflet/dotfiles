@@ -6,10 +6,14 @@ alias l="ls -lAh"
 alias mv="mv -iv"
 alias rm="rm -iv"
 
-[[ -n "$(which tmux 2>/dev/null)" ]] && alias tmux="tmux -2"
-
 [[ -n "$(which bat 2>/dev/null)" ]] && alias cat="bat"
 
+[[ -n "$(which batcat 2>/dev/null)" ]] && alias cat="batcat"
+
+[[ -n "$(which fdfind 2>/dev/null)" ]] && alias fd="fdfind"
+
 [[ -n "$(which gls 2>/dev/null)" ]] && alias ls="gls --color --group-directories-first"
+
+[[ -n "$(which tmux 2>/dev/null)" ]] && alias tmux="tmux -2"
 
 # vim: ft=sh ts=4 sw=4 et
