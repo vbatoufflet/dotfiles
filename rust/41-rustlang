@@ -1,0 +1,12 @@
+RUSTUP_HOME="${HOME}/.opt/lib/rust"
+export RUSTUP_HOME
+
+CARGO_HOME="${HOME}/.opt/lib/cargo"
+export CARGO_HOME
+
+PATH="${CARGO_HOME}/bin${PATH:+:${PATH}}"
+export PATH
+
+[[ -f "${CARGO_HOME}/env" ]] && source ${CARGO_HOME}/env
+
+# vim: ft=sh ts=4 sw=4 et
