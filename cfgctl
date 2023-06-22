@@ -3,7 +3,7 @@
 #
 # The MIT License (MIT)
 #
-# Copyright (c) 2014-2016 Vincent Batoufflet <vincent@batoufflet.info>
+# Copyright (c) 2014-2023 Vincent Batoufflet <vincent@batou.dev>
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -324,7 +324,7 @@ if __name__ == '__main__':
             raise CommandError from e
 
         if len(args) == 0:
-            raise CommandError
+            args.append('list')
 
         # Execute command
         try:
