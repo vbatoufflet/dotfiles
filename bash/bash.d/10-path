@@ -1,4 +1,4 @@
-PATH="${HOME}/.scripts:${HOME}/.opt/bin:/sbin:/usr/sbin:/usr/local/sbin${PATH:+:${PATH}}"
+PATH="${HOME}/.scripts:${HOME}/.opt/bin:/opt/homebrew/bin:/sbin:/usr/sbin:/usr/local/sbin${PATH:+:${PATH}}"
 export PATH
 
 MANPATH="$(manpath 2>/dev/null)"
