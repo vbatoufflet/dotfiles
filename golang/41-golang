@@ -1,7 +1,17 @@
-GOPATH="${HOME}/.opt/lib/go:${HOME}/Development/go"
+if [[ -n "$(which goenv 2>/dev/null)" ]]; then
+    GOENV_ROOT="${HOME}/.goenv"
+    export GOENV_ROOT
+
+    PATH="${GOENV_ROOT}/bin:${PATH:+:${PATH}}"
+    export PATH
+
+    eval "$(goenv init -)"
+fi
+
+GOPATH="${HOME}/.opt/lib/go"
 export GOPATH
 
-PATH="${GOPATH}/bin${PATH:+:${PATH}}"
+PATH="${GOPATH}/bin:${PATH:+:${PATH}}"
 export PATH
 
 GO111MODULE=on
