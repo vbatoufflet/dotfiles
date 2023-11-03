@@ -25,6 +25,7 @@ set smartcase
 set hidden
 set incsearch
 set modeline
+set modelines=2
 set nocompatible
 set nohlsearch
 set novisualbell
