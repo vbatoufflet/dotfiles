@@ -1,0 +1,8 @@
+[aws]
+disabled = true
+
+[gcloud]
+disabled = true
+
+[hostname]
+ssh_symbol = ''
